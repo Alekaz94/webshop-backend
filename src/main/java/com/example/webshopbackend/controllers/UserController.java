@@ -1,6 +1,5 @@
 package com.example.webshopbackend.controllers;
 
-import com.example.webshopbackend.dto.UserDTO;
 import com.example.webshopbackend.entities.User;
 import com.example.webshopbackend.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +34,8 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO) {
-        return userService.updateUser(userId, userDTO);
+    public ResponseEntity<User> updateUser(@PathVariable UUID userId, @RequestBody User user) {
+        return userService.updateUser(userId, user);
     }
 
     @DeleteMapping("/{userId}")

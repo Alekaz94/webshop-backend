@@ -1,6 +1,5 @@
 package com.example.webshopbackend.services;
 
-import com.example.webshopbackend.dto.UserDTO;
 import com.example.webshopbackend.entities.User;
 import com.example.webshopbackend.repositories.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -40,6 +39,7 @@ public class UserService {
         userToCreate.setUserId(UUID.randomUUID());
         userToCreate.setFirstName(user.getFirstName());
         userToCreate.setLastName(user.getLastName());
+        userToCreate.setPassword(user.getPassword());
         userToCreate.setEmail(user.getEmail());
         userToCreate.setRole(user.getRole());
 
@@ -47,23 +47,23 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    public ResponseEntity<UserDTO> updateUser(UUID userId, UserDTO userDTO) {
+    public ResponseEntity<User> updateUser(UUID userId, User user) {
 
         if(userId == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        if(userDTO == null) {
+        if(user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
         Optional<User> userToUpdate = userRepository.findById(userId);
 
         if(userToUpdate.isPresent()) {
-            userToUpdate.get().setFirstName(userDTO.firstName());
-            userToUpdate.get().setLastName(userDTO.lastName());
-            userToUpdate.get().setEmail(userDTO.email());
-            userToUpdate.get().setPassword(userDTO.password());
+            userToUpdate.get().setFirstName(user.getFirstName());
+            userToUpdate.get().setLastName(user.getLastName());
+            userToUpdate.get().setEmail(user.getEmail());
+            userToUpdate.get().setPassword(user.getPassword());
 
             userRepository.save(userToUpdate.get());
             return ResponseEntity.status(HttpStatus.OK).build();

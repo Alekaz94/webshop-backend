@@ -1,13 +1,18 @@
 package com.example.webshopbackend.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.example.webshopbackend.enums.RoleEnums;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,17 +21,7 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private Enum role;
+    @Enumerated(EnumType.STRING)
+    private RoleEnums role;
 
-    public User(String firstName, String lastName, String email, String password, Enum role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
-
-    public User() {
-
-    }
 }

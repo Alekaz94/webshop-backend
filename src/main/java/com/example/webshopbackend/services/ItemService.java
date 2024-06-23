@@ -1,6 +1,5 @@
 package com.example.webshopbackend.services;
 
-import com.example.webshopbackend.dto.ItemDTO;
 import com.example.webshopbackend.entities.Item;
 import com.example.webshopbackend.repositories.ItemRepository;
 import org.springframework.http.HttpStatus;
@@ -34,37 +33,37 @@ public class ItemService {
         }
     }
 
-    public ResponseEntity<Item> createItem(ItemDTO itemDTO) {
-        Item item = new Item();
+    public ResponseEntity<Item> createItem(Item item) {
+        Item itemToCreate = new Item();
 
-        item.setItemId(UUID.randomUUID());
-        item.setItemName(itemDTO.itemName());
-        item.setItemCost(itemDTO.itemCost());
-        item.setItemQuantity(itemDTO.itemQuantity());
-        item.setItemEnum(itemDTO.itemEnum());
-        item.setSoldOut(itemDTO.soldOut());
+        itemToCreate.setItemId(UUID.randomUUID());
+        itemToCreate.setItemName(item.getItemName());
+        itemToCreate.setItemCost(item.getItemCost());
+        itemToCreate.setItemQuantity(item.getItemQuantity());
+        itemToCreate.setItemEnum(item.getItemEnum());
+        itemToCreate.setSoldOut(item.getSoldOut());
 
-        itemRepository.save(item);
+        itemRepository.save(itemToCreate);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    public ResponseEntity<ItemDTO> updateItem(UUID itemId, ItemDTO itemDTO) {
+    public ResponseEntity<Item> updateItem(UUID itemId, Item item) {
 
         if(itemId == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        if(itemDTO == null) {
+        if(item == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
         Optional<Item> itemToUpdate = itemRepository.findById(itemId);
 
         if(itemToUpdate.isPresent()) {
-            itemToUpdate.get().setItemName(itemDTO.itemName());
-            itemToUpdate.get().setItemCost(itemDTO.itemCost());
-            itemToUpdate.get().setItemQuantity(itemDTO.itemQuantity());
-            itemToUpdate.get().setItemEnum(itemDTO.itemEnum());
+            itemToUpdate.get().setItemName(item.getItemName());
+            itemToUpdate.get().setItemCost(item.getItemCost());
+            itemToUpdate.get().setItemQuantity(item.getItemQuantity());
+            itemToUpdate.get().setItemEnum(item.getItemEnum());
 
             itemRepository.save(itemToUpdate.get());
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -74,7 +73,7 @@ public class ItemService {
 
     }
 
-    public ResponseEntity<ItemDTO> deleteItem(UUID itemId) {
+    public ResponseEntity<Item> deleteItem(UUID itemId) {
 
         if(itemId == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

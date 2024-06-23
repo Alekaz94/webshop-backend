@@ -5,12 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
 
     @Id
@@ -22,15 +26,4 @@ public class Item {
     private ItemEnum itemEnum;
     private Boolean soldOut;
 
-    public Item(String itemName, double itemCost, double itemQuantity, ItemEnum itemEnum, Boolean soldOut) {
-        this.itemName = itemName;
-        this.itemCost = itemCost;
-        this.itemQuantity = itemQuantity;
-        this.itemEnum = itemEnum;
-        this.soldOut = soldOut;
-    }
-
-    public Item() {
-
-    }
 }

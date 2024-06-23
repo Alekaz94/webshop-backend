@@ -1,6 +1,5 @@
 package com.example.webshopbackend.controllers;
 
-import com.example.webshopbackend.dto.ItemDTO;
 import com.example.webshopbackend.entities.Item;
 import com.example.webshopbackend.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,17 +31,17 @@ public class ItemController {
     }
 
     @PostMapping()
-    public ResponseEntity<Item> createItem(@RequestBody ItemDTO itemDTO) {
-        return itemService.createItem(itemDTO);
+    public ResponseEntity<Item> createItem(@RequestBody Item item) {
+        return itemService.createItem(item);
     }
 
     @PutMapping("/{itemId}")
-    public ResponseEntity<ItemDTO> updateItem(@PathVariable UUID itemId, @RequestBody ItemDTO itemDTO) {
-        return itemService.updateItem(itemId, itemDTO);
+    public ResponseEntity<Item> updateItem(@PathVariable UUID itemId, @RequestBody Item item) {
+        return itemService.updateItem(itemId, item);
     }
 
     @DeleteMapping("/{itemId]")
-    public ResponseEntity<ItemDTO> deleteItem(@PathVariable UUID itemId) {
+    public ResponseEntity<Item> deleteItem(@PathVariable UUID itemId) {
         return itemService.deleteItem(itemId);
     }
 }
