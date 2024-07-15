@@ -42,6 +42,7 @@ public class ItemService {
         itemToCreate.setItemQuantity(item.getItemQuantity());
         itemToCreate.setItemEnum(item.getItemEnum());
         itemToCreate.setSoldOut(item.getSoldOut());
+        itemToCreate.setUrl(item.getUrl());
 
         itemRepository.save(itemToCreate);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -63,7 +64,7 @@ public class ItemService {
             itemToUpdate.get().setItemName(item.getItemName());
             itemToUpdate.get().setItemCost(item.getItemCost());
             itemToUpdate.get().setItemQuantity(item.getItemQuantity());
-            itemToUpdate.get().setItemEnum(item.getItemEnum());
+            itemToUpdate.get().setUrl(item.getUrl());
 
             itemRepository.save(itemToUpdate.get());
             return ResponseEntity.status(HttpStatus.OK).build();

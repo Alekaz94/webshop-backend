@@ -1,6 +1,6 @@
 package com.example.webshopbackend.entities;
 
-import com.example.webshopbackend.enums.ItemEnum;
+import com.example.webshopbackend.enums.ItemEnums;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -23,7 +23,8 @@ public class Item {
     private double itemCost;
     private double itemQuantity;
     @Enumerated(EnumType.STRING)
-    private ItemEnum itemEnum;
+    ItemEnums itemEnum;
     private Boolean soldOut;
+    private String url;
 
 }
